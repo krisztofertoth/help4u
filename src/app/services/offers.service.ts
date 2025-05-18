@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+import { collection, collectionData, addDoc, doc, updateDoc, deleteDoc, Firestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export type Offer = { id?: string; jobId: string; price: number; message: string; status: string };
+
+@Injectable({ providedIn: 'root' })
+export class OffersService {
+  private colRef;
+  constructor(private firestore: Firestore) {
+    this.colRef = collection(this.firestore, 'offers');
+  }
+
+  getOffers(): Observable<Offer[]> {
+    return collectionData(this.colRef, { idField: 'id' }) as Observable<Offer[]>;
+  }
+
+  addOffer(offer: Omit<Offer, 'id'>) {
+    return addDoc(this.colRef, offer);
+  }
+
+  updateOffer(id: string, data: Partial<Offer>) {
+    return updateDoc(doc(this.colRef, id), data);
+  }
+
+  deleteOffer(id: string) {
+    return deleteDoc(doc(this.colRef, id));
+  }
+}
