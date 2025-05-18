@@ -1,0 +1,51 @@
+.offers-list {
+  margin-left: 20px;
+  ul {
+    margin: 0; padding: 0; list-style: circle;
+    li { font-size: .97em; }
+  }
+}
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-card {
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.item-card {
+  margin-bottom: 16px;
+}
+
+.spacer {
+  height: 12px;
+}
+
+.price {
+  float: right;
+  font-weight: 600;
+  color: #a4752b;
+}
+
+.offer-title {
+  font-weight: 600;
+  margin: 10px;
+}
+
+.offers-list {
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.no-offer {
+  font-style: italic;
+  color: #9c9589;
+}

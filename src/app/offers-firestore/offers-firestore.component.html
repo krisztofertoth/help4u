@@ -1,0 +1,76 @@
+<div class="container">
+  <!-- Új ajánlat gomb -->
+  <button mat-raised-button color="primary" (click)="openForm()" style="margin-bottom: 16px;">
+    <mat-icon>add_circle</mat-icon> Új ajánlat
+  </button>
+
+  <!-- Lista -->
+  <mat-card *ngFor="let offer of offers$ | async" class="item-card">
+    <mat-card-title>
+      {{ getJobTitle(offer.jobId) }}
+      <span class="price">{{ offer.price | number }} Ft</span>
+    </mat-card-title>
+    <mat-card-subtitle>{{ offer.message }}</mat-card-subtitle>
+
+    <span class="offer-status"
+          [ngClass]="{
+        accepted: offer.status === 'ACCEPTED',
+        rejected: offer.status === 'REJECTED',
+        pending: offer.status === 'PENDING'
+      }">
+      <ng-container [ngSwitch]="offer.status">
+        <mat-icon *ngSwitchCase="'ACCEPTED'">check_circle</mat-icon>
+        <mat-icon *ngSwitchCase="'REJECTED'">cancel</mat-icon>
+        <mat-icon *ngSwitchCase="'PENDING'">hourglass_empty</mat-icon>
+      </ng-container>
+      {{ offer.status }}
+    </span>
+
+    <mat-card-actions>
+      <button mat-button color="accent" (click)="openForm(offer)">Szerkeszt</button>
+      <button mat-button color="warn" (click)="delete(offer)">Töröl</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- MODAL dialógus -->
+  <ng-template #formDialog>
+    <h2 mat-dialog-title>
+      {{ editing ? 'Ajánlat szerkesztése' : 'Új ajánlat' }}
+    </h2>
+    <form (ngSubmit)="save()" autocomplete="off">
+      <mat-dialog-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Munkához</mat-label>
+          <mat-select [(ngModel)]="form.jobId" name="jobId" required>
+            <mat-option value="" disabled>Válassz munkát</mat-option>
+            <mat-option *ngFor="let job of jobsList" [value]="job.id">
+              {{ job.title }} – {{ job.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ajánlott ár (Ft)</mat-label>
+          <input matInput type="number" min="0" [(ngModel)]="form.price" name="price" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Üzenet</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="form.message" name="message" required></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Státusz</mat-label>
+          <mat-select [(ngModel)]="form.status" name="status" required>
+            <mat-option value="PENDING">Függőben</mat-option>
+            <mat-option value="ACCEPTED">Elfogadva</mat-option>
+            <mat-option value="REJECTED">Elutasítva</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" type="submit">
+          {{ editing ? 'Mentés' : 'Hozzáadás' }}
+        </button>
+        <button mat-stroked-button color="accent" type="button" (click)="closeDialog()">Mégse</button>
+      </mat-dialog-actions>
+    </form>
+  </ng-template>
+</div>

@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+// Fő szín: világos barna (bézs/sand)
+$construction-primary: mat.m2-define-palette(mat.$m2-amber-palette, 300, 700, 900);
+// Ha saját HEX kódokat akarsz, használj define-palette helyett define-light-theme!
+// Példa saját főszín:
+// $construction-primary: mat.define-palette(mat.$brown-palette, 300, 700, 900);
+
+// Másodlagos: mély zöld vagy szürke
+//$construction-accent: mat.define-palette(mat.$green-palette, 600, 800, 900);
+// vagy:
+$construction-accent: mat.m2-define-palette(mat.$m2-grey-palette, 600, 800, 900);
+
+// Warn: piros
+$construction-warn: mat.m2-define-palette(mat.$m2-deep-orange-palette);
+
+$construction-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $construction-primary,
+    accent: $construction-accent,
+    warn: $construction-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0
+));
+
+@include mat.all-component-themes($construction-theme);
+
+body {
+  background: #f9f6f3;
+}
+
+.mat-mdc-button,
+.mat-mdc-raised-button {
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+.mat-mdc-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 24px #0001;
+}

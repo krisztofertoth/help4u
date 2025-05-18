@@ -1,0 +1,25 @@
+.main-navbar {
+  background: #e3cda0 !important;
+  color: #563e1a !important;
+  box-shadow: 0 2px 12px #a4752b22;
+  .navbar-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-right: 32px;
+  }
+  .navbar-links {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+    a[mat-button] {
+      color: #6e4e19 !important;
+      font-weight: 500;
+      &.active-link {
+        color: #a4752b !important;
+        background: #fff8e1;
+        border-radius: 8px;
+      }
+    }
+  }
+}
