@@ -25,6 +25,7 @@
     <a mat-button routerLink="/articles" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Cikkek</a>
     <a *ngIf="user" mat-button routerLink="/jobs" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Munkák</a>
     <a *ngIf="user" mat-button routerLink="/offers" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Ajánlatok</a>
+    <a mat-button routerLink="/about" routerLinkActive="active-link">Rólunk</a>
     <span *ngIf="!user">
       <button mat-stroked-button (click)="openLogin(); mobileMenuOpen=false">Bejelentkezés</button>
     </span>
