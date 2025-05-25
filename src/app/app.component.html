@@ -23,8 +23,8 @@
   <!-- Mobilmenü -->
   <div class="mobile-menu" *ngIf="mobileMenuOpen">
     <a mat-button routerLink="/articles" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Cikkek</a>
-    <a mat-button routerLink="/jobs" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Munkák</a>
-    <a mat-button routerLink="/offers" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Ajánlatok</a>
+    <a *ngIf="user" mat-button routerLink="/jobs" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Munkák</a>
+    <a *ngIf="user" mat-button routerLink="/offers" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Ajánlatok</a>
     <span *ngIf="!user">
       <button mat-stroked-button (click)="openLogin(); mobileMenuOpen=false">Bejelentkezés</button>
     </span>
