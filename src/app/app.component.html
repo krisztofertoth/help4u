@@ -1,11 +1,37 @@
 <mat-toolbar color="primary" class="main-navbar">
-  <span class="navbar-title">🏗️ Help4U Portál</span>
-  <span class="navbar-links">
+  <span class="navbar-title">🏗️ Help4U</span>
+  <!-- Hamburger gomb csak mobilon -->
+  <button class="hamburger" type="button" (click)="mobileMenuOpen = !mobileMenuOpen">
+    <span></span><span></span><span></span>
+  </button>
+  <!-- Asztali menü -->
+  <span class="navbar-links desktop-menu">
     <a mat-button routerLink="/articles" routerLinkActive="active-link">Cikkek</a>
-    <a mat-button routerLink="/jobs" routerLinkActive="active-link">Munkák</a>
-    <a mat-button routerLink="/offers" routerLinkActive="active-link">Ajánlatok</a>
+    <a *ngIf="user" mat-button routerLink="/jobs" routerLinkActive="active-link">Munkák</a>
+    <a *ngIf="user" mat-button routerLink="/offers" routerLinkActive="active-link">Ajánlatok</a>
+    <a mat-button routerLink="/about" routerLinkActive="active-link">Rólunk</a>
   </span>
+  <span class="auth-btns desktop-menu">
+    <span *ngIf="!user">
+      <button mat-stroked-button (click)="openLogin()">Bejelentkezés</button>
+    </span>
+    <span *ngIf="user">
+      <button mat-stroked-button color="warn" (click)="logout()">Kijelentkezés</button>
+    </span>
+  </span>
+
+  <!-- Mobilmenü -->
+  <div class="mobile-menu" *ngIf="mobileMenuOpen">
+    <a mat-button routerLink="/articles" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Cikkek</a>
+    <a mat-button routerLink="/jobs" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Munkák</a>
+    <a mat-button routerLink="/offers" routerLinkActive="active-link" (click)="mobileMenuOpen=false">Ajánlatok</a>
+    <span *ngIf="!user">
+      <button mat-stroked-button (click)="openLogin(); mobileMenuOpen=false">Bejelentkezés</button>
+    </span>
+    <span *ngIf="user">
+      <button mat-stroked-button color="warn" (click)="logout(); mobileMenuOpen=false">Kijelentkezés</button>
+    </span>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
 
-<router-outlet />

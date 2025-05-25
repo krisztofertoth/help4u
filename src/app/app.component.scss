@@ -22,4 +22,67 @@
       }
     }
   }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    gap: 5px;
+    margin-left: auto;
+    cursor: pointer;
+
+    span {
+      height: 4px;
+      background: #563e1a;
+      border-radius: 2px;
+      display: block;
+      width: 100%;
+      transition: 0.3s;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .desktop-menu, .auth-btns {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .main-navbar {
+    .navbar-links,
+    .auth-btns {
+      display: none !important;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .mobile-menu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 56px;
+      left: 0;
+      width: 100vw;
+      background: #e3cda0;
+      z-index: 99;
+      padding: 20px 10px 10px 10px;
+      box-shadow: 0 2px 12px #a4752b22;
+
+      a[mat-button], button {
+        width: 80%;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

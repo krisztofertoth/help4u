@@ -6,8 +6,8 @@ import { Offer, OffersService } from '../services/offers.service';
 import { Job, JobsService } from '../services/jobs.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import {MatFormField, MatInputModule, MatLabel} from '@angular/material/input';
+import {MatButton, MatButtonModule} from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
@@ -20,7 +20,17 @@ import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dial
   standalone: true,
   imports: [
     CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule,
-    MatButtonModule, MatDividerModule, MatListModule, MatChipsModule, MatSelectModule, MatIconModule, MatDialogModule
+    MatButtonModule, MatDividerModule, MatListModule, MatChipsModule, MatSelectModule, MatIconModule, MatDialogModule,FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatFormField,
+    MatButton,
+    MatLabel,
+    FormsModule,
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   templateUrl: './offers-firestore.component.html',
   styleUrls: ['./offers-firestore.component.scss']
@@ -72,5 +82,22 @@ export class OffersFirestoreComponent {
       this.offerSvc.deleteOffer(offer.id!);
       if (this.editing?.id === offer.id) this.closeDialog();
     }
+  }
+
+  statusMap: Record<string, string> = {
+    PENDING: 'Függőben',
+    ACCEPTED: 'Elfogadva',
+    REJECTED: 'Elutasítva'
+  };
+
+  acceptOffer(offer: Offer) {
+    // Elfogadottá teszi az adott ajánlatot, a többit elutasítja ugyanerre a jobId-ra
+    this.offerSvc.acceptOffer(offer.id!, offer.jobId).then(() => {
+      // akár toast/üzenet, ha kell
+    });
+  }
+
+  rejectOffer(offer: Offer) {
+    this.offerSvc.updateOffer(offer.id!, { status: 'REJECTED' });
   }
 }

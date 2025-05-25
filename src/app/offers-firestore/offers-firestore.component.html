@@ -23,10 +23,12 @@
         <mat-icon *ngSwitchCase="'REJECTED'">cancel</mat-icon>
         <mat-icon *ngSwitchCase="'PENDING'">hourglass_empty</mat-icon>
       </ng-container>
-      {{ offer.status }}
+      {{ statusMap[offer.status] || offer.status }}
     </span>
 
     <mat-card-actions>
+      <button mat-button color="primary" (click)="acceptOffer(offer)">Elfogad</button>
+      <button mat-button color="warn" (click)="rejectOffer(offer)">Elutasít</button>
       <button mat-button color="accent" (click)="openForm(offer)">Szerkeszt</button>
       <button mat-button color="warn" (click)="delete(offer)">Töröl</button>
     </mat-card-actions>

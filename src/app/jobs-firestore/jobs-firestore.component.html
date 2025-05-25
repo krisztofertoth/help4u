@@ -22,7 +22,9 @@
     <div class="offer-title"><b>Ajánlatok:</b></div>
     <mat-list>
       <mat-list-item *ngFor="let offer of job.offers">
-        {{ offer.price | number:'1.0-0' }} Ft – "{{ offer.message }}" ({{ offer.status }})
+        {{ offer.price | number:'1.0-0' }} Ft – "{{ offer.message }}" ({{ statusMap[offer.status] || offer.status }})
+        <button mat-button color="primary" (click)="acceptOffer(offer)">Elfogad</button>
+        <button mat-button color="warn" (click)="rejectOffer(offer)">Elutasít</button>
       </mat-list-item>
       <mat-list-item *ngIf="!job.offers || job.offers.length === 0" disabled>
         <span class="no-offer">Nincs még ajánlat.</span>

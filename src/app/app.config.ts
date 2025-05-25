@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import {getAuth, provideAuth} from '@angular/fire/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -16,5 +17,5 @@ export const appConfig: ApplicationConfig = {
       apiKey: "AIzaSyCLbCZpXGSi2L36xGitYHQ2lNt4ceteP54",
       authDomain: "fir-portal-b9364.firebaseapp.com",
       messagingSenderId: "51536227213" })),
-    provideFirestore(() => getFirestore()), provideStorage(() => getStorage())]
+    provideFirestore(() => getFirestore()), provideStorage(() => getStorage()), provideAuth(() => getAuth())]
 };

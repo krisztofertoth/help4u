@@ -89,4 +89,19 @@ export class JobsFirestoreComponent {
       if (this.editing?.id === job.id) this.closeDialog();
     }
   }
+  statusMap: Record<string, string> = {
+    PENDING: 'Függőben',
+    ACCEPTED: 'Elfogadva',
+    REJECTED: 'Elutasítva'
+  };
+  acceptOffer(offer: Offer) {
+    // Elfogadottá teszi az adott ajánlatot, a többit elutasítja ugyanerre a jobId-ra
+    this.offersSvc.acceptOffer(offer.id!, offer.jobId).then(() => {
+      // akár toast/üzenet, ha kell
+    });
+  }
+
+  rejectOffer(offer: Offer) {
+    this.offersSvc.updateOffer(offer.id!, { status: 'REJECTED' });
+  }
 }
