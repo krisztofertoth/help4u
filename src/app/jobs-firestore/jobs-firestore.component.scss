@@ -49,3 +49,18 @@
   font-style: italic;
   color: #9c9589;
 }
+.offer-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  .offer-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+}
+.offer-list-item{
+  height: auto !important;
+}
+
